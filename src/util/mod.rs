@@ -16,6 +16,7 @@ pub struct PathResult {
     /// Which path this is.
     pub path: usize,
 
+    pub processed: usize,
     /// The final value from the path.
     ///
     /// If the path failed the reason vill be in the error. Otherwise there will be a value
@@ -36,6 +37,7 @@ impl fmt::Display for PathResult {
             "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ PATH {} ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
             self.path
         )?;
+        writeln!(f,"Instructions processed for this path: {}",self.processed)?;
 
         match &self.result {
             PathStatus::Ok(None) => {

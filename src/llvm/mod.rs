@@ -158,6 +158,9 @@ impl Config {
 pub struct Stats {
     /// Number of instructions the executor has processed in total.
     pub instructions_processed: usize,
+
+    //Vector of saved amounts of ran instructions, for calculating specific path stats...
+    pub saved_processed: Vec<usize>,
 }
 
 impl Default for Stats {
@@ -170,6 +173,7 @@ impl Stats {
     pub fn new() -> Self {
         Self {
             instructions_processed: 0,
+            saved_processed: Vec::new(),
         }
     }
 }

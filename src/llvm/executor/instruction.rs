@@ -21,6 +21,9 @@ impl<'p> LLVMInstruction {
     /// Process a single LLVM IR instruction.
     pub fn process_instruction(e: &mut LLVMExecutor<'p>, instr: &'p Instruction) -> Result<()> {
         e.vm.stats.instructions_processed += 1;
+        //Print statements for verifying instruction counter
+       // println!("{}",instr);
+        //println!("Processing instr nr.{}", e.vm.stats.instructions_processed);
 
         match &instr {
             Instruction::Load(i) => Self::load(e, i),
@@ -86,6 +89,9 @@ impl<'p> LLVMInstruction {
         terminator: &Terminator,
     ) -> Result<TerminatorResult> {
         e.vm.stats.instructions_processed += 1;
+        //Print statements for verifying instruction counter
+        //println!("{}",terminator);
+        //println!("Processing instr nr.{}", e.vm.stats.instructions_processed);
 
         match terminator {
             Terminator::Ret(i) => Self::ret(e, i),

@@ -30,7 +30,7 @@ impl<State, E> Path<State, E> {
             None => vec![],
         };
 
-        Self { state, constraints }
+        Self { state, constraints}
     }
 }
 

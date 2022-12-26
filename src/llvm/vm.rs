@@ -64,6 +64,14 @@ impl VM {
     pub fn run(&mut self) -> Option<(Result<ReturnValue, VMError>, LLVMState)> {
         loop {
             if let Some(path) = self.paths.get_path() {
+                match self.stats.saved_processed.pop() {
+                    Some(result)=>{
+                        self.stats.instructions_processed = result;
+                        //Print statements for verifying instruction counter
+                        // println!("Rolled back to: {}",result);
+                        }
+                    None=>{}
+                }
                 let mut executor = LLVMExecutor::from_state(path.state, self, self.project);
                 for constraint in path.constraints {
                     executor.state.constraints.assert(&constraint);

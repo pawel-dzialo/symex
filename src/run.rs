@@ -80,10 +80,11 @@ pub fn run(
     let result = run_paths(&mut vm, cfg)?;
 
     println!("Paths: {}, took: {:?}", result.num_paths, result.duration);
-    println!(
+    /*println!(
         "Instructions processed: {}",
         vm.stats.instructions_processed
     );
+    println!("Instr.Vector: {:?}",vm.stats.saved_processed);*/
 
     Ok(result.results)
 }
@@ -101,6 +102,8 @@ fn run_paths(vm: &mut VM, cfg: &RunConfig) -> Result<RunnerResult, VMError> {
     let mut path_num = 0;
 
     let start = Instant::now();
+   // let current_instructions_processed = vm.stats.instructions_processed;
+    //println!("Currently xD {}",current_instructions_processed);
     while let Some((path_result, mut state)) = vm.run() {
         path_num += 1;
         // TODO: Cache for solutions.
@@ -136,14 +139,17 @@ fn run_paths(vm: &mut VM, cfg: &RunConfig) -> Result<RunnerResult, VMError> {
                 }
                 Err(e) => PathStatus::Failed(create_error_reason(&mut state, e)),
             };
+            
 
             let path_result = PathResult {
                 path: path_num,
+                processed: vm.stats.instructions_processed,
                 result,
                 inputs,
                 symbolics,
             };
             println!("{}", path_result);
+            //println!("thisprinter");
 
             results.push(path_result);
         }
