@@ -85,6 +85,7 @@ pub fn run(
         vm.stats.instructions_processed
     );
     println!("Instr.Vector: {:?}",vm.stats.saved_processed);*/
+    println!("WCET in terms of LLVM-IR instructions: {}",vm.stats.wcet);
 
     Ok(result.results)
 }
@@ -102,8 +103,6 @@ fn run_paths(vm: &mut VM, cfg: &RunConfig) -> Result<RunnerResult, VMError> {
     let mut path_num = 0;
 
     let start = Instant::now();
-   // let current_instructions_processed = vm.stats.instructions_processed;
-    //println!("Currently xD {}",current_instructions_processed);
     while let Some((path_result, mut state)) = vm.run() {
         path_num += 1;
         // TODO: Cache for solutions.
@@ -149,7 +148,9 @@ fn run_paths(vm: &mut VM, cfg: &RunConfig) -> Result<RunnerResult, VMError> {
                 symbolics,
             };
             println!("{}", path_result);
-            //println!("thisprinter");
+            if path_result.processed>vm.stats.wcet{
+                vm.stats.wcet = path_result.processed;
+            }
 
             results.push(path_result);
         }
