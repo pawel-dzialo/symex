@@ -162,6 +162,8 @@ pub struct Stats {
     //Vector of saved amounts of ran instructions, for calculating specific path stats...
     pub saved_processed: Vec<usize>,
 
+    pub total_instructions: usize,
+
     pub wcet: usize,
 }
 
@@ -177,6 +179,7 @@ impl Stats {
             instructions_processed: 0,
             saved_processed: Vec::new(),
             wcet: 0,
+            total_instructions: 0,
         }
     }
 }

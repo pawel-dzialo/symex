@@ -86,6 +86,7 @@ pub fn run(
     );
     println!("Instr.Vector: {:?}",vm.stats.saved_processed);*/
     println!("WCET in terms of LLVM-IR instructions: {}",vm.stats.wcet);
+    println!("Total amount of instructions processed: {}", vm.stats.total_instructions);
 
     Ok(result.results)
 }
