@@ -156,12 +156,13 @@ impl Config {
 
 #[derive(Debug)]
 pub struct Stats {
-    /// Number of instructions the executor has processed in total.
+    //Amount of instructions processed for current path taking into account branches
     pub instructions_processed: usize,
 
     //Vector of saved amounts of ran instructions, for calculating specific path stats...
     pub saved_processed: Vec<usize>,
 
+    // Number of instructions the executor has processed in total.
     pub total_instructions: usize,
 
     pub wcet: usize,

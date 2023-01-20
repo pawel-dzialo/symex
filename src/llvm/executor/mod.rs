@@ -293,7 +293,7 @@ impl<'vm> LLVMExecutor<'vm> {
     }
 
     pub fn fork(&mut self, constraint: DExpr) -> Result<()> {
-        self.vm.stats.saved_processed.push(self.vm.stats.instructions_processed); //Path fork found, push the current instructions processed state
+      //  self.vm.stats.saved_processed.push(self.vm.stats.instructions_processed); //Path fork found, push the current instructions processed state
         let forked_state = self.state.clone();
         let path = Path::new(forked_state, Some(constraint));
         self.vm.paths.save_path(path);

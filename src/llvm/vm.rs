@@ -65,8 +65,8 @@ impl VM {
         loop {
             if let Some(path) = self.paths.get_path() {
                 match self.stats.saved_processed.pop() { //Once a path has finished running, pop a new one along with the corresponding instructions processed amount
-                    Some(result)=>{
-                        self.stats.instructions_processed = result;
+                    Some(prev_amount)=>{
+                        self.stats.instructions_processed = prev_amount;
                         }
                     None=>{}
                 }
