@@ -280,7 +280,6 @@ impl<'vm> LLVMExecutor<'vm> {
             bb_label,
             constraint
         );
-        //println!("Forked at {}",self.vm.stats.instructions_processed);
         self.vm.stats.saved_processed.push(self.vm.stats.instructions_processed);
         let current_location = self.state.stack_frames.last().unwrap().location.clone();
         let jump_location = Location::jump_bb(current_location, bb_label)?;
@@ -294,8 +293,7 @@ impl<'vm> LLVMExecutor<'vm> {
     }
 
     pub fn fork(&mut self, constraint: DExpr) -> Result<()> {
-        //println!("Forked at {}",self.vm.stats.instructions_processed);
-        self.vm.stats.saved_processed.push(self.vm.stats.instructions_processed);
+        self.vm.stats.saved_processed.push(self.vm.stats.instructions_processed); //Path fork found, push the current instructions processed state
         let forked_state = self.state.clone();
         let path = Path::new(forked_state, Some(constraint));
         self.vm.paths.save_path(path);

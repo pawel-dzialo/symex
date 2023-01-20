@@ -80,11 +80,6 @@ pub fn run(
     let result = run_paths(&mut vm, cfg)?;
 
     println!("Paths: {}, took: {:?}", result.num_paths, result.duration);
-    /*println!(
-        "Instructions processed: {}",
-        vm.stats.instructions_processed
-    );
-    println!("Instr.Vector: {:?}",vm.stats.saved_processed);*/
     println!("WCET in terms of LLVM-IR instructions: {}",vm.stats.wcet);
     println!("Total amount of instructions processed: {}", vm.stats.total_instructions);
 

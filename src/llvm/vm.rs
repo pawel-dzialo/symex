@@ -64,11 +64,9 @@ impl VM {
     pub fn run(&mut self) -> Option<(Result<ReturnValue, VMError>, LLVMState)> {
         loop {
             if let Some(path) = self.paths.get_path() {
-                match self.stats.saved_processed.pop() {
+                match self.stats.saved_processed.pop() { //Once a path has finished running, pop a new one along with the corresponding instructions processed amount
                     Some(result)=>{
                         self.stats.instructions_processed = result;
-                        //Print statements for verifying instruction counter
-                        // println!("Rolled back to: {}",result);
                         }
                     None=>{}
                 }
